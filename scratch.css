@@ -1,0 +1,106 @@
+body { 
+    background-color: #efe7da;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: black;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: darkseagreen;
+    color: black;
+    text-align: center;
+    padding: 40px;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.maincontent {
+    background-color: white;
+    width: 80%;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.vaderimg {
+    width: 70%;
+    max-width: 600px;
+    border: 4px solid black;
+    border-radius: 10px;
+}
+
+.listsection {
+    background-color: #d8c3a5;
+    width: 75%;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.listsection h2 {
+    text-align: center;
+}
+
+.listsection li {
+    margin: 8px 0;
+}
+
+.videosection {
+    background-color: white;
+    width: 80%;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.videosection iframe {
+    max-width: 100%;
+    border: 4px solid black;
+    border-radius: 10px;
+}
+
+.tableausection {
+    background-color: #f7f7f7;
+    width: 85%;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.tableausection iframe {
+    border: 4px solid black;
+    border-radius: 10px;
+}
+.footer {
+    background-color: darkseagreen;
+    color: black;
+    text-align: center;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.footer a {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: white;
+    text-decoration: underline;
+}

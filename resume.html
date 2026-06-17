@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<style>
+    * {
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+    
+    :root {
+        --black: #171411;
+        --charcoal: #26211c;
+        --cream: #f7f1e6;
+        --paper: #fffaf1;
+        --gold: #b98a3b;
+        --light-gold: #ead2a4;
+        --muted: #746b5f;
+        --border: rgba(185, 138, 59, 0.28);
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background:
+            radial-gradient(circle at 15% 10%, rgba(234, 210, 164, 0.45), transparent 28%),
+            radial-gradient(circle at 85% 20%, rgba(185, 138, 59, 0.18), transparent 24%),
+            linear-gradient(135deg, #f7f1e6, #efe3d0);
+        color: var(--black);
+        line-height: 1.7;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+            linear-gradient(rgba(185, 138, 59, 0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(185, 138, 59, 0.035) 1px, transparent 1px);
+        background-size: 34px 34px;
+        opacity: 0.55;
+    }
+
+    .navbar {
+        background: rgba(23, 20, 17, 0.94);
+        padding: 18px 8%;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(234, 210, 164, 0.25);
+    }
+
+    .nav-container {
+        max-width: 1180px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .brand {
+        color: #ffffff;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 21px;
+        letter-spacing: 1px;
+        text-decoration: none;
+    }
+
+    .brand span {
+        color: var(--light-gold);
+    }
+
+    .nav-links a {
+        color: #f5efe4;
+        text-decoration: none;
+        margin-left: 26px;
+        font-size: 13px;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+        color: var(--light-gold);
+    }
+
+    .hero {
+        min-height: 88vh;
+        padding: 105px 8% 95px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::after {
+        content: "";
+        position: absolute;
+        right: -120px;
+        top: 80px;
+        width: 430px;
+        height: 430px;
+        border: 1px solid rgba(185, 138, 59, 0.28);
+        border-radius: 50%;
+        box-shadow:
+            inset 0 0 0 28px rgba(255, 250, 241, 0.35),
+            inset 0 0 0 56px rgba(185, 138, 59, 0.08);
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 1180px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1.35fr 0.9fr;
+        gap: 60px;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    .eyebrow {
+        display: inline-block;
+        color: var(--gold);
+        font-weight: bold;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-size: 12px;
+        margin-bottom: 18px;
+        border: 1px solid var(--border);
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 250, 241, 0.55);
+    }
+
+    .hero h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 72px;
+        margin: 0 0 18px;
+        line-height: 0.98;
+        color: var(--black);
+        letter-spacing: -1.5px;
+    }
+
+    .hero h2 {
+        font-size: 22px;
+        font-weight: 500;
+        color: var(--muted);
+        margin: 0 0 24px;
+    }
+
+    .hero p {
+        font-size: 18px;
+        max-width: 740px;
+        margin-bottom: 34px;
+        color: #41382f;
+    }
+
+    .accent-line {
+        width: 110px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--gold), var(--light-gold), var(--gold));
+        margin: 26px 0;
+        border-radius: 999px;
+    }
+
+    .button {
+        display: inline-block;
+        background: linear-gradient(135deg, #171411, #3a3027);
+        color: #ffffff;
+        text-decoration: none;
+        padding: 15px 28px;
+        border-radius: 999px;
+        font-weight: bold;
+        letter-spacing: 0.6px;
+        border: 1px solid rgba(234, 210, 164, 0.45);
+        box-shadow: 0 14px 28px rgba(23, 20, 17, 0.24);
+        transition: 0.25s ease;
+    }
+
+    .button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 35px rgba(23, 20, 17, 0.32);
+    }
+
+    .hero-card {
+        background:
+            linear-gradient(145deg, rgba(255, 250, 241, 0.94), rgba(247, 241, 230, 0.88));
+        border: 1px solid var(--border);
+        border-radius: 32px;
+        padding: 42px;
+        box-shadow:
+            0 24px 60px rgba(23, 20, 17, 0.18),
+            inset 0 1px 0 rgba(255, 255, 255, 0.85);
+        position: relative;
+    }
+
+    .monogram {
+        width: 82px;
+        height: 82px;
+        border-radius: 50%;
+        border: 1px solid var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 31px;
+        color: var(--gold);
+        margin-bottom: 24px;
+        background: rgba(255, 255, 255, 0.42);
+    }
+
+    .hero-card h3 {
+        margin-top: 0;
+        color: var(--black);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 29px;
+    }
+
+    .hero-card ul {
+        padding-left: 20px;
+        margin-bottom: 0;
+    }
+
+    .hero-card li {
+        margin-bottom: 11px;
+    }
+
+    .container {
+        width: 84%;
+        max-width: 1180px;
+        margin: auto;
+        padding: 78px 0;
+        position: relative;
+        z-index: 2;
+    }
+
+    .section-heading {
+        margin-bottom: 38px;
+        text-align: center;
+    }
+
+    .section-heading h2 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 44px;
+        color: var(--black);
+        margin-bottom: 8px;
+        letter-spacing: -0.4px;
+    }
+
+    .section-heading p {
+        color: var(--muted);
+        margin-top: 0;
+        font-size: 16px;
+    }
+
+    .section-heading::after {
+        content: "";
+        display: block;
+        width: 86px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        margin: 18px auto 0;
+        border-radius: 999px;
+    }
+
+    .card {
+        background:
+            linear-gradient(145deg, rgba(255, 250, 241, 0.96), rgba(255, 255, 255, 0.86));
+        padding: 38px;
+        margin-bottom: 30px;
+        border-radius: 26px;
+        box-shadow:
+            0 18px 45px rgba(23, 20, 17, 0.09),
+            inset 0 1px 0 rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(185, 138, 59, 0.22);
+        transition: 0.25s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow:
+            0 24px 56px rgba(23, 20, 17, 0.13),
+            inset 0 1px 0 rgba(255, 255, 255, 0.92);
+    }
+
+    .card h3 {
+        color: var(--black);
+        margin-top: 0;
+        margin-bottom: 12px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 28px;
+    }
+
+    .card h4 {
+        color: #5f421d;
+        margin-bottom: 7px;
+        font-size: 19px;
+    }
+
+    .small-label {
+        color: var(--muted);
+        font-size: 14px;
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-style: italic;
+    }
+
+    .two-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    ul {
+        padding-left: 24px;
+        margin-bottom: 0;
+    }
+
+    li {
+        margin-bottom: 8px;
+    }
+
+    .resume-grid {
+        display: grid;
+        grid-template-columns: 0.8fr 2.4fr;
+        gap: 28px;
+        align-items: start;
+    }
+
+    .resume-side {
+        font-weight: bold;
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 2.2px;
+        font-size: 12px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
+    }
+
+    .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 13px;
+        justify-content: center;
+    }
+
+    .skills span {
+        display: inline-block;
+        background:
+            linear-gradient(135deg, #fff8e8, #ead2a4);
+        color: var(--black);
+        padding: 12px 17px;
+        border-radius: 999px;
+        font-weight: bold;
+        font-size: 14px;
+        border: 1px solid rgba(185, 138, 59, 0.35);
+        box-shadow: 0 8px 18px rgba(23, 20, 17, 0.07);
+    }
+
+    .contact-section {
+        background:
+            linear-gradient(135deg, rgba(23, 20, 17, 0.98), rgba(45, 37, 29, 0.97));
+        color: #ffffff;
+        border-radius: 34px;
+        padding: 58px;
+        text-align: center;
+        box-shadow: 0 28px 70px rgba(23, 20, 17, 0.28);
+        border: 1px solid rgba(234, 210, 164, 0.28);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-section::before {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border: 1px solid rgba(234, 210, 164, 0.22);
+        border-radius: 24px;
+        pointer-events: none;
+    }
+
+    .contact-section h2 {
+        margin-top: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 42px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .contact-section p,
+    .contact-info {
+        position: relative;
+        z-index: 2;
+    }
+
+    .contact-info {
+        margin-top: 26px;
+        line-height: 2.2;
+        color: #f4ead8;
+    }
+
+    footer {
+        background-color: var(--black);
+        color: #f4ead8;
+        text-align: center;
+        padding: 28px;
+        font-size: 14px;
+        border-top: 1px solid rgba(234, 210, 164, 0.22);
+    }
+
+    @media (max-width: 850px) {
+        .hero {
+            min-height: auto;
+            padding: 78px 7%;
+        }
+
+        .hero-content,
+        .two-column,
+        .resume-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+        }
+
+        .nav-container {
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .nav-links {
+            text-align: center;
+        }
+
+        .nav-links a {
+            margin: 0 8px;
+            display: inline-block;
+            padding: 4px 0;
+        }
+
+        .container {
+            width: 90%;
+            padding: 58px 0;
+        }
+
+        .contact-section {
+            padding: 42px 26px;
+        }
+    }
+</style>
+<nav class="navbar">
+    <div class="nav-container">
+        <a class="brand" href="#home">Nicholas <span>Zurcher</span></a>
+
+        <div class="nav-links">
+            <a href="#intro">Intro</a>
+            <a href="#resume">Résumé</a>
+            <a href="#projects">Projects</a>
+            <a href="#scratch">Scratch</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<header id="home" class="hero">
+    <div class="hero-content">
+        <div>
+            <div class="eyebrow">Business • Marketing • Technology</div>
+            <h1>Nicholas Cohen Zurcher</h1>
+            <div class="accent-line"></div>
+            <h2>Pre-Business Student | Entrepreneurship, Strategy & Marketing</h2>
+            <p>
+                I am interested in building businesses, understanding customer needs, and using technology
+                to improve the way companies make decisions. My background includes retail experience,
+                business coursework, and an AI-supported sales and inventory project.
+            </p>
+            <a href="#resume" class="button">View Résumé</a>
+        </div>
+
+        <div class="hero-card">
+            <div class="monogram">NZ</div>
+            <h3>Focus Areas</h3>
+            <ul>
+                <li>Entrepreneurship</li>
+                <li>Business Strategy</li>
+                <li>Marketing</li>
+                <li>AI Business Tools</li>
+                <li>Retail Operations</li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<main>
+
+    <section id="intro" class="container">
+        <div class="section-heading">
+            <h2>Intro</h2>
+            <p>Business, marketing, and technology interests.</p>
+        </div>
+
+        <div class="card">
+            <p>
+                I am a pre-business student at Brigham Young University with interests in entrepreneurship,
+                strategy, marketing, and technology. I enjoy solving real business problems, organizing
+                information, and finding practical ways to help companies make better decisions.
+            </p>
+
+            <p>
+                My experience includes retail operations, customer service, sales observation, and building
+                an AI-supported sales and inventory tool. I am especially interested in how marketing,
+                strategy, and technology can work together to help businesses grow.
+            </p>
+        </div>
+    </section>
+
+    <section id="resume" class="container">
+        <div class="section-heading">
+            <h2>Résumé</h2>
+            <p>Education, experience, projects, and skills.</p>
+        </div>
+
+        <div class="card resume-grid">
+            <div class="resume-side">Education</div>
+            <div>
+                <h3>Brigham Young University</h3>
+                <p class="small-label">Pre-Business Student</p>
+                <p>
+                    Academic interests include entrepreneurship, strategy, marketing, technology,
+                    and business operations.
+                </p>
+                <ul>
+                    <li>Developing a foundation in business, information systems, and analytical thinking.</li>
+                    <li>Interested in applying technology and marketing strategy to real business problems.</li>
+                    <li>Focused on building skills that support entrepreneurship and business growth.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card resume-grid">
+            <div class="resume-side">Experience</div>
+            <div>
+                <h3>Zurchers Party, Wedding & Costumes</h3>
+                <p class="small-label">Retail Associate | Part-time</p>
+                <ul>
+                    <li>Assist customers with product questions, store navigation, and purchasing decisions.</li>
+                    <li>Support daily retail operations through organization, inventory awareness, and customer service.</li>
+                    <li>Observe customer needs, sales patterns, and product demand in a retail environment.</li>
+                    <li>Help maintain a helpful and organized store experience for customers.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card resume-grid">
+            <div class="resume-side">Projects</div>
+            <div>
+                <h3>AI Sales and Inventory Agent</h3>
+                <p class="small-label">Google AI Studio and Google Sheets</p>
+                <ul>
+                    <li>Built an AI-powered tool to support sales, inventory, and pricing decisions.</li>
+                    <li>Organized business data in Google Sheets to make information easier to understand and use.</li>
+                    <li>Created a system designed to identify useful business patterns and support better decisions.</li>
+                    <li>Combined entrepreneurship, strategy, marketing, and technology into one practical business project.</li>
+                </ul>
+
+                <h4>Information Systems Coursework</h4>
+                <ul>
+                    <li>Worked with spreadsheets, SQL, VBA, and data analysis concepts.</li>
+                    <li>Learned how business technology can organize, analyze, and improve decision making.</li>
+                    <li>Built technical skills that support future business and marketing projects.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card resume-grid">
+            <div class="resume-side">Honors</div>
+            <div>
+                <h3>Honors & Awards</h3>
+                <ul>
+                    <li>Seal of Biliteracy in Chinese.</li>
+                    <li>Recognized for advanced language ability and cross-cultural communication skills.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <div class="section-heading">
+            <h2>Projects</h2>
+            <p>Business and technology work.</p>
+        </div>
+
+        <div class="two-column">
+            <div class="card">
+                <h3>AI Sales & Inventory Agent</h3>
+                <p>
+                    This project used Google AI Studio and Google Sheets to create a tool that supports
+                    inventory tracking, pricing decisions, and sales analysis. It reflects my interest
+                    in entrepreneurship, marketing, strategy, and practical business technology.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Business Information Systems Work</h3>
+                <p>
+                    Through coursework, I practiced using spreadsheets, SQL, VBA, and data analysis to
+                    understand how technology can improve business organization, efficiency, and decision making.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Apex Drift Canvas Game</h3>
+                <p>
+                    A one-page HTML, CSS, and JavaScript drift game with tunnel-style road reveal,
+                    one-button controls, animated lane lines, and score tracking.
+                </p>
+                <a href="drift.html" class="button">Play Apex Drift</a>
+            </div>
+
+            <div id="scratch" class="card">
+                <h3>Scratch Page</h3>
+                <p>
+                    A custom scratch page with its own styling, navigation, media, and embedded content.
+                </p>
+                <a href="scratch.html" class="button">Open Scratch Page</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <div class="section-heading">
+            <h2>Skills</h2>
+            <p>Business, technology, and communication.</p>
+        </div>
+
+        <div class="card">
+            <div class="skills">
+                <span>Entrepreneurship</span>
+                <span>Strategy</span>
+                <span>Marketing</span>
+                <span>Retail Operations</span>
+                <span>Customer Service</span>
+                <span>Google Sheets</span>
+                <span>Microsoft Excel</span>
+                <span>Google Suite</span>
+                <span>Microsoft Suite</span>
+                <span>AI Tools</span>
+                <span>SQL</span>
+                <span>VBA</span>
+                <span>Data Analysis</span>
+                <span>Chinese</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <div class="contact-section">
+            <h2>Contact</h2>
+            <p>
+                Interested in entrepreneurship, marketing strategy, business technology,
+                and creative problem solving.
+            </p>
+
+            <div class="contact-info">
+                <div>Email: xxxxx@example.com</div>
+                <div>Phone: (XXX) XXX-XXXX</div>
+                <div>Location: City, State</div>
+                <div>LinkedIn: linkedin.com/in/xxxxx</div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Nicholas Cohen Zurcher. All rights reserved.</p>
+</footer>
